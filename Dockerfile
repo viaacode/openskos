@@ -4,7 +4,7 @@ MAINTAINER Ruben Taelman "ruben.taelman@ugent.be"
 
 # Install apache2
 RUN apt-get -y update
-RUN apt-get install -y apache2 php5 libapache2-mod-php5 mysql-client
+RUN apt-get install -y apache2 php5 libapache2-mod-php5 mysql-client php5-mysql
 EXPOSE 80
 
 # Install requirements
@@ -15,7 +15,7 @@ RUN curl https://packages.zendframework.com/releases/ZendFramework-1.11.15/ZendF
 RUN mkdir -p /var/www/zend && tar -xvzf /tmp/zend.tar.gz -C /var/www/zend --strip-components 1
 
 # Install OpenSKOS
-RUN git clone https://github.com/CatchPlus/OpenSKOS.git /var/www/OpenSKOS
+RUN git clone https://github.com/rubensworks/OpenSKOS.git /var/www/OpenSKOS
 COPY application.ini /var/www/OpenSKOS/application/configs/application.ini
 
 # TODO: temp

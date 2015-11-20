@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 1
 if [ ! -f /.openskos-installed ]; then
     echo "Provisioning..."
     while ! nc -z db 3306; do sleep 3; done
