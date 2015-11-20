@@ -1,0 +1,15 @@
+web:
+  build: .
+  links:
+    - db
+  ports:
+    - "3000:80"
+db:
+  image: mysql
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: openskos
+    MYSQL_USER: openskos
+    MYSQL_PASSWORD: openskos
+    MYSQL_DATABASE: openskos
