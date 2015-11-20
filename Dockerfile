@@ -36,7 +36,24 @@ RUN chmod a+w /var/www/OpenSKOS/data/uploads \
     && chmod a+w /var/www/OpenSKOS/public/data/icons/uploads \
     && chmod -R a+r /var/www/OpenSKOS/
 
+# Install Java
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
+RUN add-apt-repository -y ppa:webupd8team/java
+RUN apt-get update -y
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+RUN apt-get install -y oracle-java8-installer
+
+# Install Apache Solr 3.4
+RUN curl http://archive.apache.org/dist/lucene/solr/3.4.0/apache-solr-3.4.0.tgz -o /tmp/solr.tar.gz
+RUN mkdir -p /var/www/solr && tar -xvzf /tmp/solr.tar.gz -C /var/www/solr --strip-components 1
+
+# Configure Solr
+RUN mkdir /var/www/solr/example/openskos
+RUN cp -r /var/www/OpenSKOS/data/solr/conf /var/www/solr/example/openskos
+
 # Setup and start server
-CMD /tmp/setup.sh && /usr/sbin/apache2ctl -D FOREGROUND
-#CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
+CMD /tmp/setup.sh \
+    && cd /var/www/solr/example && (java -Dsolr.solr.home="./openskos" -Xms1024m -Xmx1024m -jar start.jar &) \
+    && /usr/sbin/apache2ctl -D FOREGROUND
 
