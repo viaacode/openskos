@@ -13,3 +13,5 @@ db:
     MYSQL_USER: openskos
     MYSQL_PASSWORD: openskos
     MYSQL_DATABASE: openskos
+  volumes:
+    my.cnf:/etc/mysql/my.cnf
