@@ -2,6 +2,10 @@
 FROM ubuntu:14.04
 MAINTAINER Ruben Taelman "ruben.taelman@ugent.be"
 
+# VIAA proxy
+ENV http_proxy="http://proxy.do.viaa.be:80/"
+ENV https_proxy="http://proxy.do.viaa.be:80/"
+
 # Install apache2
 RUN apt-get -y update
 RUN apt-get install -y apache2 php5 libapache2-mod-php5 mysql-client php5-mysql

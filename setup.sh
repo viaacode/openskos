@@ -7,3 +7,6 @@ if [ ! -f /.openskos-installed ]; then
     php -d include_path=/var/www/zend/library/ /var/www/OpenSKOS/tools/tenant.php --code 1111 --name ABCD --email admin@example.org --password admin create
     touch /.openskos-installed
 fi
+
+rm -rf /run/httpd/* /tmp/httpd*
+

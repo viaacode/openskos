@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t openskos .
+docker build --virtualbox-memory "8096" -t openskos .

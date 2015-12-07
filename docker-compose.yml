@@ -4,6 +4,7 @@ web:
     - db
   ports:
     - "3000:80"
+  restart: always
 db:
   image: mysql
   ports:
@@ -15,3 +16,4 @@ db:
     MYSQL_DATABASE: openskos
   volumes:
     my.cnf:/etc/mysql/my.cnf
+  restart: always
